@@ -12,12 +12,13 @@ A scalable and modular backend boilerplate built with **Express.js**, **TypeScri
 - 📦 **Module Aliasing** – Clean import paths using `@` prefix
 - 🛡 **Middleware-based Structure** – Easily extensible and readable
 - 📁 **Modular Folder Structure** – Scales with your application
-- 📄 **Joi** – Schema validation for request bodies
+- 📄 **Zod** – Schema validation for request bodies
 - 🔐 **JWT Authentication** – Pre-configured token-based auth
 - 📨 **Nodemailer** – Email support ready to use
 - 🌍 **CORS + Dotenv** – Environment-friendly configuration
 - 🔄 **Live Reload** with `nodemon` + `ts-node`
 - 1️⃣ **Status Codes** - Predefined enum to access code number by code name
+- 📚 **Swagger Documentation** - Automatic API documentation
 
 ---
 
@@ -47,8 +48,9 @@ src/
 | Prisma      | ORM for SQL databases          |
 | MySQL2      | Database driver (for Prisma)   |
 | JWT         | Auth tokens                    |
-| Joi         | Schema validation              |
+| Zod         | Schema validation              |
 | Nodemailer  | Email sending support          |
+| Swagger     | API Documentation              |
 
 ---
 

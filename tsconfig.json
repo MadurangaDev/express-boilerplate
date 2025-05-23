@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -24,7 +24,10 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*.ts"], // Include only the source folder
   "exclude": ["node_modules"] // Exclude build and dependency folders
