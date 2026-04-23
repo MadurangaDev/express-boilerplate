@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { handleLogin } from "@controllers";
 import { validateRequestBody } from "@middlewares";
-import { loginRequestSchema } from "@validators";
+import { loginRequestSchema } from "@schemas";
 import { asyncHandler } from "@utils";
 
 const authRoutes = Router();

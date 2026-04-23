@@ -174,7 +174,7 @@ import { env } from "@configs";
 import { StatusCodes } from "@enums";
 import { createResponse, AppError } from "@utils";
 import { authRoutes } from "@routes";
-import { loginRequestSchema } from "@validators";
+import { loginRequestSchema } from "@schemas";
 ```
 
 Full alias list:
@@ -191,7 +191,7 @@ Full alias list:
 | `@interfaces`      | `src/types/interfaces/index.ts`           |
 | `@requests`        | `src/types/interfaces/requests/index.ts`  |
 | `@responses`       | `src/types/interfaces/responses/index.ts` |
-| `@validators`      | `src/validators/index.ts`                 |
+| `@schemas`         | `src/schemas/index.ts`                    |
 | `@constants`       | `src/constants/index.ts`                  |
 | `@openAPIRegistry` | `src/configs/openapi.registry.ts`         |
 

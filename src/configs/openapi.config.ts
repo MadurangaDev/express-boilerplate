@@ -1,6 +1,6 @@
 import { OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
 import { registry } from "@openAPIRegistry";
-import { registerAuthSchemas } from "@validators";
+import { registerAuthSchemas } from "@schemas";
 
 // Import validators here so registerPath() calls execute AFTER registry exists
 registerAuthSchemas();

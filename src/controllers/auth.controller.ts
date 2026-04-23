@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { StatusCodes } from "@enums";
 import { createResponse } from "@utils";
 import { getValidatedBody } from "@middlewares";
-import { loginRequestSchema } from "@validators";
+import { loginRequestSchema } from "@schemas";
 import { loginService } from "@services";
 import { ILoginResponse } from "@responses";
 
