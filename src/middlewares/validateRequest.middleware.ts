@@ -1,7 +1,7 @@
 import { Request, NextFunction, RequestHandler } from "express";
 import { ZodTypeAny, infer as zInfer } from "zod";
 
-import { IValidatedRequestData } from "@requests";
+import type { IValidatedRequestData } from "@requests";
 import { AppError } from "@utils";
 import { StatusCodes } from "@enums";
 

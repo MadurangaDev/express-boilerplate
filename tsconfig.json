@@ -18,7 +18,8 @@
       "@responses": ["./src/types/interfaces/responses/index.ts"],
       "@validators": ["./src/validators/index.ts"],
       "@openAPIRegistry": ["./src/configs/openapi.registry.ts"],
-      "@constants": ["./src/constants/index.ts"]
+      "@constants": ["./src/constants/index.ts"],
+      "@prismaClient": ["./src/configs/prisma.ts"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,

@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
-import { AppError, createResponse } from "@utils";
+import { AppError, createResponse, logger } from "@utils";
 import { StatusCodes } from "@enums";
-import { logger } from "@utils";
 
 export const errorHandler = (
   err: Error,

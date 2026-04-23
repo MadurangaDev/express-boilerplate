@@ -1,10 +1,9 @@
 import pino from "pino";
-import { env } from "@configs";
+
+const nodeEnv = process.env.NODE_ENV; // logger doesn't depend on env, so we can read it directly without stubbing
 
 export const logger = pino({
-  level: env.NODE_ENV === "production" ? "info" : "debug",
+  level: nodeEnv === "production" ? "info" : "debug",
   transport:
-    env.NODE_ENV !== "production"
-      ? { target: "pino-pretty", options: { colorize: true } }
-      : undefined,
+    nodeEnv !== "production" ? { target: "pino-pretty", options: { colorize: true } } : undefined,
 });

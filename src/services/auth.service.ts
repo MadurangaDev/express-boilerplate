@@ -12,7 +12,12 @@ export const loginService = async (email: string, _password: string): Promise<IL
     if (error instanceof AppError) {
       throw error;
     }
-
-    throw new AppError("Something went wrong", StatusCodes.INTERNAL_SERVER_ERROR);
+    if (error instanceof Error) {
+      throw new AppError(
+        `Something went wrong. cause: ${(error as Error).message}`,
+        StatusCodes.INTERNAL_SERVER_ERROR,
+      );
+    }
+    throw new AppError("Something went wrong.", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };

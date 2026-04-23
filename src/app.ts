@@ -11,7 +11,7 @@ import { StatusCodes } from "@enums";
 import { errorHandler, setValidatedRequestData } from "@middlewares";
 import { authRoutes } from "@routes";
 import { AppError, createResponse } from "@utils";
-import { RATE_LIMIT, REQUEST_BODY_SIZE_LIMIT } from "@constants";
+import { RATE_LIMIT_WINDOW_MS, REQUEST_BODY_SIZE_LIMIT } from "@constants";
 
 export const app = express();
 
@@ -19,16 +19,16 @@ const allowedOrigins = env.CORS_ORIGINS?.split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const hasAllowedOrigins = !!allowedOrigins && allowedOrigins.length > 0;
+const corsOrigin = hasAllowedOrigins
+  ? allowedOrigins
+  : env.NODE_ENV === "production"
+    ? false
+    : true;
+
 app.use(
   cors({
-    origin:
-      env.NODE_ENV === "production"
-        ? allowedOrigins && allowedOrigins.length > 0
-          ? allowedOrigins
-          : false
-        : allowedOrigins && allowedOrigins.length > 0
-          ? allowedOrigins
-          : true,
+    origin: corsOrigin,
   }),
 );
 app.use(express.json({ limit: REQUEST_BODY_SIZE_LIMIT }));
@@ -37,7 +37,7 @@ app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
 
 app.use(
   rateLimit({
-    windowMs: RATE_LIMIT,
+    windowMs: RATE_LIMIT_WINDOW_MS,
     max: 100,
     standardHeaders: true,
     legacyHeaders: false,
