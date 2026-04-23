@@ -1,6 +1,6 @@
 import { ILoginResponse } from "@responses";
 import { StatusCodes } from "@enums";
-import { AppError } from "@utils";
+import { AppError, logger } from "@utils";
 
 export const loginService = async (email: string, _password: string): Promise<ILoginResponse> => {
   try {
@@ -12,12 +12,9 @@ export const loginService = async (email: string, _password: string): Promise<IL
     if (error instanceof AppError) {
       throw error;
     }
-    if (error instanceof Error) {
-      throw new AppError(
-        `Something went wrong. cause: ${(error as Error).message}`,
-        StatusCodes.INTERNAL_SERVER_ERROR,
-      );
-    }
+
+    logger.error({ err: error }, "Login service failed");
+
     throw new AppError("Something went wrong.", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
