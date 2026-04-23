@@ -9,16 +9,18 @@ A scalable and modular backend boilerplate built with **Express.js**, **TypeScri
 - ⚙️ **Express.js** – Lightweight web framework
 - 🔐 **TypeScript** – Strictly typed and maintainable
 - 🎯 **Prisma ORM** – Modern and type-safe database access
-- 📦 **Module Aliasing** – Clean import paths using `@` prefix
+- 📦 **Module Path Aliasing** – Clean import paths using `@` prefix
 - 🛡 **Middleware-based Structure** – Easily extensible and readable
 - 📁 **Modular Folder Structure** – Scales with your application
+- 💫 **Centralized Responses** - Centralized response helpers and error handling
 - 📄 **Zod** – Schema validation for request bodies
 - 🔐 **JWT Authentication** – Pre-configured token-based auth
 - 📨 **Nodemailer** – Email support ready to use
 - 🌍 **CORS + Dotenv** – Environment-friendly configuration
-- 🔄 **Live Reload** with `nodemon` + `ts-node`
+- 🔄 **Live Reload** with `tsx`
 - 1️⃣ **Status Codes** - Predefined enum to access code number by code name
 - 📚 **Swagger Documentation** - Automatic API documentation
+- 🏹 **Strict Practices** - ESLint, Prettier, Husky, lint-staged, and Vitest
 
 ---
 
@@ -34,6 +36,7 @@ src/
 ├── utils/           # Reusable helper functions
 ├── types/           # TypeScript interfaces and enums
 ├── helpers/         # Misc helpers (hashing, tokens, etc.)
+├── app.ts           # Prepare express app
 └── server.ts        # Entry point of the application
 ```
 
@@ -41,16 +44,16 @@ src/
 
 ## 🛠 Tech Stack
 
-| Tech        | Description                    |
-|-------------|--------------------------------|
-| Express     | Web server framework           |
-| TypeScript  | Superset of JavaScript         |
-| Prisma      | ORM for SQL databases          |
-| MySQL2      | Database driver (for Prisma)   |
-| JWT         | Auth tokens                    |
-| Zod         | Schema validation              |
-| Nodemailer  | Email sending support          |
-| Swagger     | API Documentation              |
+| Tech       | Description                  |
+| ---------- | ---------------------------- |
+| Express    | Web server framework         |
+| TypeScript | Superset of JavaScript       |
+| Prisma     | ORM for SQL databases        |
+| MySQL2     | Database driver (for Prisma) |
+| JWT        | Auth tokens                  |
+| Zod        | Schema validation            |
+| Nodemailer | Email sending support        |
+| Swagger    | API Documentation            |
 
 ---
 
@@ -116,6 +119,22 @@ npm start
 
 ---
 
+---
+
+## Available Scripts
+
+- `npm run dev` starts the development server with `tsx`
+- `npm run build` compiles TypeScript and rewrites path aliases
+- `npm run start` runs the compiled output from `dist/`
+- `npm run lint` checks lint rules
+- `npm run lint:fix` fixes lint issues where possible
+- `npm run format` formats the repository with Prettier
+- `npm run typecheck` runs TypeScript without emitting files
+- `npm run test` runs the Vitest suite
+- `npm run test:coverage` runs tests with coverage output
+
+---
+
 ## 🔗 API Example
 
 A working test route is available at:
@@ -125,6 +144,7 @@ GET /
 ```
 
 Response:
+
 ```json
 {
   "body": "welcome to API",
@@ -134,25 +154,25 @@ Response:
 
 ---
 
-## 🔧 Module Aliases
+## 🔧 Module Path Aliases
 
-Module paths are defined using `tsconfig.json` and `_moduleAliases`:
+Module paths are defined using `tsconfig.json`:
 
 ```ts
 import { StatusCodes } from "@enums";
 import { createResponse } from "@utils";
-import { authRouter } from "@routes";
+import { authRoutes } from "@routes";
+...
 ```
 
 ---
 
-## 📑 Scripts
+## Boilerplate Guidance
 
-| Script       | Description                     |
-|--------------|---------------------------------|
-| `npm run dev`| Start development server        |
-| `npm run build` | Compile TypeScript into JS |
-| `npm start`  | Run compiled app from `dist/`   |
+- Keep framework wiring in `app.ts`
+- Keep process startup in `server.ts`
+- Add real business logic in `services/`
+- Prefer validated request data over mutating Express internals
 
 ---
 
@@ -171,4 +191,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## 🤝 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-

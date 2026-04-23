@@ -1,40 +1,35 @@
-require("module-alias/register");
+import { env } from "@configs";
+import { Server } from "node:http";
+import { logger } from "@utils";
 
-import express, { Request, Response } from "express";
-import { config } from "dotenv";
-import cors from "cors";
-import swaggerUi from "swagger-ui-express";
+import { app } from "./app.js";
 
-import { StatusCodes } from "@enums";
-import { createResponse } from "@utils";
-import { authRoutes } from "@routes";
-import { swaggerSpec } from "@configs";
-
-config();
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use("/auth", authRoutes);
-
-// Default Routes
-app.all("/", (req: Request, res: Response): Response => {
-  return createResponse(
-    res,
-    "welcome to API",
-    "API is running",
-    StatusCodes.OK
-  );
-});
-app.all("*", (req: Request, res: Response) => {
-  return createResponse(res, null, "Route not found", StatusCodes.NOT_FOUND);
+const server: Server = app.listen(env.PORT, () => {
+  logger.info({ port: env.PORT }, "Server is running");
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const shutdown = (signal: string, exitCode = 0): void => {
+  logger.info({ signal, exitCode }, "Shutting down gracefully");
+
+  server.close((error) => {
+    if (error) {
+      logger.error({ err: error, signal }, "Error while closing the server");
+      process.exit(1);
+    }
+
+    process.exit(exitCode);
+  });
+};
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+process.on("uncaughtException", (error) => {
+  logger.fatal({ err: error }, "Uncaught exception");
+  shutdown("uncaughtException", 1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  logger.error({ reason }, "Unhandled promise rejection");
+  shutdown("unhandledRejection", 1);
 });
